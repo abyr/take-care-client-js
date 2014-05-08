@@ -1,7 +1,7 @@
 var _errors = [];
 (function() {
     window.onerror = function() {
-        _errors.push(arguments)
+        _errors.push(arguments);
     };
     var logError = function() {
         var newScript = document.createElement("script"),
