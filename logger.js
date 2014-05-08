@@ -43,16 +43,18 @@
 
                 message = createInput('message', error[0], i);
                 url = createInput('url', error[1], i);
-                line = createInput('line', error[2], i);
+                line = createInput('lineNumber', parseInt(error[2], 10), i);
 
                 form.appendChild(message);
                 form.appendChild(url);
                 form.appendChild(line);
 
                 symbolInt = parseInt(error[3], 10);
-                if (+symbolInt) {
+
+                if (symbolInt) {
+                    console.log('symbolInt', symbolInt);
                     // symbol or error object
-                    symbol = createInput('symbol', +symbolInt, i);
+                    symbol = createInput('symbolNumber', symbolInt, i);
                     form.appendChild(symbol);
                 }
 
