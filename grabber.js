@@ -1,18 +1,16 @@
-window.onerror = function(msg, url, line) {
-
-    var errorLog = {
-            message: msg,
-            file: url,
-            line: line,
-            browser: window.navigator.userAgent
-        };
-
-    var request = new XMLHttpRequest();
-
-    request.open('POST', 'http://localhost:3000/api', true);
-
-    request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    request.send(JSON.stringify(errorLog));
-
-    return false;
-};
+var _errors = [];
+(function() {
+    window.onerror = function() {
+        _errors.push(arguments)
+    };
+    var logError = function() {
+        var newScript = document.createElement("script"),
+            firstScript = document.getElementsByTagName("script")[0];
+        newScript.src = "logger.js";
+        newScript.async = true;
+        firstScript.parentNode.insertBefore(newScript, firstScript)
+    };
+    window.addEventListener
+        ? window.addEventListener("load", logError, false)
+        : window.attachEvent("onload", logError)
+})();
