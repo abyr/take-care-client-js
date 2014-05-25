@@ -1,6 +1,7 @@
 (function() {
 
-    var createInput = function (name, value, index) {
+    var isOnLoad = true,
+        createInput = function (name, value, index) {
             var element = false;
 
             if (name && value) {
@@ -12,16 +13,12 @@
             return element;
         },
 
-        doLog = function (beforeLoad) {
-
+        doLog = function () {
             // debug
-            console.log('errors', _errors);
+            console.log('sending errors', _errors);
 
             if (!_errors.length) {
                 return false;
-            }
-            if (!beforeLoad) {
-                beforeLoad = 0;
             }
 
             var form = document.createElement("form"),
@@ -61,14 +58,15 @@
             }
 
             document.body.appendChild(form);
+
             form.submit();
 
             // clean errors
             _errors = [];
 
-            // observe once again
+            // observe once again, loop
             setTimeout(function() {
-                doLog(0);
+                doLog();
             }, 1000);
 
         },
@@ -80,7 +78,10 @@
     iframe.setAttribute('name', 'error-log-frame');
     document.body.appendChild(iframe);
 
-    // check on load
-    doLog(1);
+    // check on load and start loop
+    doLog();
+
+    // onload errors are processed
+    isOnLoad = false;
 
 })();
