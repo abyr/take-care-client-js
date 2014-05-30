@@ -49,7 +49,6 @@
                 symbolInt = parseInt(error[3], 10);
 
                 if (symbolInt) {
-                    console.log('symbolInt', symbolInt);
                     // symbol or error object
                     symbol = createInput('symbolNumber', symbolInt, i);
                     form.appendChild(symbol);

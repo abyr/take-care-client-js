@@ -13,4 +13,24 @@ var _errors = [];
     window.addEventListener
         ? window.addEventListener("load", logError, false)
         : window.attachEvent("onload", logError)
+
+    window.grabber = {
+        fake: function(n) {
+            var i = 0,
+                err = [];
+
+            if (!n) {
+                n = 10;
+            }
+            for (i = 0; i < n; i++) {
+                err = [
+                    chance.sentence(),
+                    'http://' + chance.domain() + '/' + chance.word() + '.html',
+                    chance.integer({min: 1, max: 500}),
+                    chance.integer({min: 1, max: 50})
+                ];
+                _errors.push(err);
+            }
+        }
+    }
 })();
