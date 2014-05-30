@@ -28,7 +28,8 @@
                 url, // file
                 line,
                 symbol,
-                symbolInt;
+                symbolInt,
+                browser;
 
             form.setAttribute("method", "post");
             form.setAttribute("enctype", "application/json");
