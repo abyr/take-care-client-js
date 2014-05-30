@@ -1,0 +1,23 @@
+{
+  "name": "take-care-client-js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/abyr/take-care-client-js",
+  "authors": [
+    "Aleksandr Denisenko <abyrcheg@gmail.com>"
+  ],
+  "description": "Js logger for take care",
+  "main": "grabber.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chance": "~0.5.6",
+    "gremlins.js": "~0.1.0"
+  }
+}
