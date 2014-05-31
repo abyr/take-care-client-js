@@ -1,26 +1,35 @@
 var _errors = [];
+
 (function() {
     window.onerror = function() {
         _errors.push(arguments);
     };
+
     var logError = function() {
         var newScript = document.createElement("script"),
             firstScript = document.getElementsByTagName("script")[0];
+
         newScript.src = "logger.js";
         newScript.async = true;
         firstScript.parentNode.insertBefore(newScript, firstScript)
     };
+
     window.addEventListener
         ? window.addEventListener("load", logError, false)
         : window.attachEvent("onload", logError)
 
     window.grabber = {
+
+        fakeMode: false,
+
         fake: function(n) {
+            this.fakeMode = true;
+
             var i = 0,
                 err = [];
 
             if (!n) {
-                n = 10;
+                n = 10; // default
             }
             for (i = 0; i < n; i++) {
                 err = [
@@ -31,6 +40,7 @@ var _errors = [];
                 ];
                 _errors.push(err);
             }
+
         }
     }
 })();

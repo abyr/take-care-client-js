@@ -14,12 +14,16 @@
         },
 
         doLog = function () {
-            // debug
-            console.log('sending errors', _errors);
+            var fake = window.grabber.fakeMode;
+
+            console.log('is fake', fake);
 
             if (!_errors.length) {
                 return false;
             }
+
+            // debug
+            console.log('sending errors', _errors);
 
             var form = document.createElement("form"),
                 i = 0,
@@ -38,6 +42,9 @@
 
             for (i = 0; i < _errors.length; i++) {
                 error = _errors[i];
+
+                // add fake mark
+                fake && form.appendChild(createInput('fake', 1, i));
 
                 message = createInput('message', error[0], i);
                 url = createInput('url', error[1], i);
