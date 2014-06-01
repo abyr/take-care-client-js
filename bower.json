@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "chance": "~0.5.6",
-    "gremlins.js": "~0.1.0"
+    "gremlins.js": "~0.1.0",
+    "bowser": "~0.7.1"
   }
 }
