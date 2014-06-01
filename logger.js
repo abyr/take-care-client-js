@@ -23,7 +23,7 @@
             }
 
             // debug
-            console.log('sending errors', _errors);
+            console.log('processing errors', _errors);
 
             var form = document.createElement("form"),
                 i = 0,
@@ -31,9 +31,14 @@
                 message,
                 url, // file
                 line,
-                symbol,
                 symbolInt,
-                browser;
+                browser = (typeof window.bowser !== 'undefined')
+                    // bowser
+                    ? bowser.name + ' ' + bowser.version
+                    // navigator
+                    : window.navigator.userAgent;
+
+            console.log('browser', browser);
 
             form.setAttribute("method", "post");
             form.setAttribute("enctype", "application/json");
@@ -45,7 +50,9 @@
 
                 // add fake mark
                 fake && form.appendChild(createInput('fake', 1, i));
+                browser && form.appendChild(createInput('browser', browser, i));
 
+                // required
                 message = createInput('message', error[0], i);
                 url = createInput('url', error[1], i);
                 line = createInput('lineNumber', parseInt(error[2], 10), i);
@@ -54,21 +61,18 @@
                 form.appendChild(url);
                 form.appendChild(line);
 
+                // symbol or error object
                 symbolInt = parseInt(error[3], 10);
-
-                if (symbolInt) {
-                    // symbol or error object
-                    symbol = createInput('symbolNumber', symbolInt, i);
-                    form.appendChild(symbol);
-                }
-
+                symbolInt && form.appendChild(createInput('symbolNumber', symbolInt, i));
             }
 
             document.body.appendChild(form);
 
             form.submit();
 
-            // clean errors
+            console.log('errors sent');
+
+            // clear all errors
             _errors = [];
 
             // observe once again, loop
