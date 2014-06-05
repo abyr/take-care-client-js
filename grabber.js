@@ -23,6 +23,7 @@ var _errors = [];
         fakeMode: false,
 
         fake: function(n) {
+            console.log('Generating ', n, ' fake errors');
             this.fakeMode = true;
 
             var i = 0,

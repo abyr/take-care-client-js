@@ -16,9 +16,11 @@
         doLog = function () {
             var fake = window.grabber.fakeMode;
 
-            console.log('is fake', fake);
-
             if (!_errors.length) {
+                // observe once again, loop
+                setTimeout(function() { // debug, reducing errors after page is loaded
+                    doLog();
+                }, 5000);
                 return false;
             }
 
@@ -32,13 +34,12 @@
                 url, // file
                 line,
                 symbolInt,
+                beforeLoad,
                 browser = (typeof window.bowser !== 'undefined')
                     // bowser
                     ? bowser.name + ' ' + bowser.version
                     // navigator
                     : window.navigator.userAgent;
-
-            console.log('browser', browser);
 
             form.setAttribute("method", "post");
             form.setAttribute("enctype", "application/json");
@@ -56,10 +57,12 @@
                 message = createInput('message', error[0], i);
                 url = createInput('url', error[1], i);
                 line = createInput('lineNumber', parseInt(error[2], 10), i);
+                beforeLoad = createInput('beforeLoad', ''+(+isOnLoad), i);
 
                 form.appendChild(message);
                 form.appendChild(url);
                 form.appendChild(line);
+                form.appendChild(beforeLoad);
 
                 // symbol or error object
                 symbolInt = parseInt(error[3], 10);
