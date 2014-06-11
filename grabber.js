@@ -16,7 +16,7 @@ var _errors = [];
 
     window.addEventListener
         ? window.addEventListener("load", logError, false)
-        : window.attachEvent("onload", logError)
+        : window.attachEvent("onload", logError);
 
     window.grabber = {
 
