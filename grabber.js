@@ -39,6 +39,7 @@ var _errors = [];
                     chance.integer({min: 1, max: 500}),
                     chance.integer({min: 1, max: 50})
                 ];
+                console.error(err);
                 _errors.push(err);
             }
 

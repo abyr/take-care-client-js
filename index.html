@@ -14,17 +14,41 @@
         <small>See some results in console and network inspector.</small>
     </div>
 
+    <div>
+        <button class="btn-error fake">Make fake error</button>
+    </div>
+    <div>
+        <button class="btn-error">Make error</button>
+    </div>
 
     <script src="grabber.js"></script>
     <script src="bower_components/bowser/bowser.min.js"></script>
     <script src="bower_components/chance/chance.js"></script>
 
     <script>
-        window.grabber.fake(2);
 
-        setTimeout(function() {
-            window.grabber.fake(3);
-        }, 2000);
+        var hasClass = function(el, className) {
+                if (el.classList) {
+                    return el.classList.contains(className);
+                }
+                return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+            },
+            doError = function () {
+                var x = go + 12;
+            },
+            doFakeError = function () {
+                window.grabber.fake(1);
+            };
+
+        var doErrorElem = document.querySelectorAll('.btn-error');
+
+        for (var i = doErrorElem.length - 1; i >= 0; i--) {
+            if (hasClass(doErrorElem[i], 'fake')) {
+                doErrorElem[i].addEventListener('click', doFakeError);
+            } else {
+                doErrorElem[i].addEventListener('click', doError);
+            }
+        };
 
     </script>
 </body>

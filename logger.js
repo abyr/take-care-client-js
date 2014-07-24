@@ -34,6 +34,7 @@
                 url, // file
                 line,
                 symbolInt,
+                trace,
                 beforeLoad,
                 browser = (typeof window.bowser !== 'undefined')
                     // bowser
@@ -58,11 +59,14 @@
                 url = createInput('url', error[1], i);
                 line = createInput('lineNumber', parseInt(error[2], 10), i);
                 beforeLoad = createInput('beforeLoad', ''+(+isOnLoad), i);
+                trace = (error[4]) ? error[4].stack : false;
 
                 form.appendChild(message);
                 form.appendChild(url);
                 form.appendChild(line);
                 form.appendChild(beforeLoad);
+
+                trace && form.appendChild(createInput('trace', trace, i));
 
                 // symbol or error object
                 symbolInt = parseInt(error[3], 10);

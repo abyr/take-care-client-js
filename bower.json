@@ -5,7 +5,7 @@
   "authors": [
     "Aleksandr Denisenko <abyrcheg@gmail.com>"
   ],
-  "description": "Js logger for take care",
+  "description": "Js error logger for take care",
   "main": "grabber.js",
   "license": "MIT",
   "private": true,
